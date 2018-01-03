@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- Programmed by William LaRocque as a side project in 2018
+	 Contact me at william.larocque@hotmail.com
+	 Not for commercial use -->
+<html>
+<head>
+  <title>Recettes</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="plugins/bootstrap-4.0.0-beta.3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="plugins/DataTables/datatables.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyD_i_8l4ew5BJ2js-mwAPXTSIE-y2cyhIM",
+		authDomain: "recettes-familiales-lg.firebaseapp.com",
+		databaseURL: "https://recettes-familiales-lg.firebaseio.com",
+		projectId: "recettes-familiales-lg",
+		storageBucket: "recettes-familiales-lg.appspot.com",
+		messagingSenderId: "185607801533"
+	  };
+	  firebase.initializeApp(config);
+  </script>
+  <script type="text/javascript" src="plugins/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="plugins/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="plugins/DataTables/datatables.js"></script>
+  <script type="text/javascript" src="plugins/sweetalert2.all.js"></script>
+</head>
+<body>
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <a class="navbar-brand" href="#">Recettes de Familles</a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="btn btn-dark" href="#" class="btn btn-dark">Recettes</a>
+      </li>
+      <li class="nav-item active">
+        <a class="btn btn-dark" href="formulaire_recette.html">Ajouter une recette</a>
+      </li>
+	  <div class="dropdown">
+		  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+			<text id="account">Mon compte</text>
+		  </button>
+		  <div class="dropdown-menu dropdown-menu-right">
+			<a type="button" class="dropdown-item btn btn-dark" id="btnSignIn">Connection</a>
+			<a type="button" class="dropdown-item btn btn-dark" id="btnContributorRequest">Devenir un contributeur</a>
+			<a type="button" class="dropdown-item btn btn-dark" id="btnSignOut">Déconnection</a>
+		  </div>
+	  </div>
+    </ul>
+	</div>
+</nav>
+<!-- Page de recettes -->
+<div class="jumbotron"><h1>Recettes</h1></div>
+<div class="container">
+	<table width="100%" class="display" id="recettes" cellspacing="0">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Fichier pdf</th>
+				<th>Difficulté</th>
+				<th>Durée</th>
+				<th>Type</th>
+				<th>Source</th>
+				<th>Ingrédients clés</th>
+				<th>Mots clés</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+	</table>
+</div>
+<script src="recettes_familles_lg.js"></script>
+<script src="recettes.js"></script>
+</body>
+</html>

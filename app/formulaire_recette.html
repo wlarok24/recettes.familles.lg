@@ -31,7 +31,7 @@
 </head>
 <body>
 <!--Navbar-->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="#">Recettes de Familles</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -49,48 +49,46 @@
 			<text id="account">Mon compte</text>
 		  </button>
 		  <div class="dropdown-menu dropdown-menu-right">
-			<a type="button" class="dropdown-item" id="btnSignIn">Connection</a>
-			<a type="button" class="dropdown-item" id="btnContributorRequest">Devenir un contributeur</a>
-			<a type="button" class="dropdown-item" id="btnSignOut">Déconnection</a>
+			<a class="dropdown-item" href="#" id="btnSignIn">Connection</a>
+			<a class="dropdown-item noauth" href="#" id="btnContributorRequest">Devenir un contributeur</a>
+			<a class="dropdown-item" href="#" id="btnSignOut">Déconnection</a>
 		  </div>
 	  </div>
     </ul>
 	</div>
 </nav>
 <!-- Formulaire -->
-<div class="jumbotron">
-	<h1>Formulaire pour une recette</h1>
-	<p>...</p>
+<div class="jumbotron jumbotron-fluid"><div class="container">
+		<h1 class="display-4">Formulaire pour une recette</h1>
+		<p class="lead">Il faut être un contributeur pour accéder à toutes les fonctionalités de cette page</p>
+	</div>
 </div>
 <div class="container">
 	<form class="col-12" data-toggle="validator" role="form">
 		<div class="form-group row">
-			<label for="recipeName" class="col-xs-12 col-md-4">Nom : </label><input type="text" class="form-control col-xs-12 col-md-8" id="recipeName" pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]{1,}$" maxlength="255" required>
+			<label for="recipeName" class="col-xs-12 col-md-4">Nom : </label><input type="text" class="authInput form-control col-xs-12 col-md-8" id="recipeName" required>
 			<div class="help-block with-errors"></div>
 		</div><div class="form-group row">
 			<label for="recipeDesc" class="col-xs-12 col-md-4">Description : </label>
-			<textarea class="form-control col-xs-12 col-md-8" rows="5" id="recipeDesc" pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-,!?()]{1,}$" required></textarea>
-			<div class="help-block with-errors"></div>
+			<textarea class="authInput form-control col-xs-12 col-md-8" rows="5" id="recipeDesc" required></textarea>
 		</div><div class="form-group row">
-			<label for="recipeSource" class="col-xs-12 col-md-4">Source : </label><input type="text" class="form-control col-xs-12 col-md-8" id="recipeSource" pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-]{1,}$" required>
+			<label for="recipeSource" class="col-xs-12 col-md-4">Source : </label><input type="text" class="authInput form-control col-xs-12 col-md-8" id="recipeSource" required>
 		</div><div class="form-group row">
-			<label for="recipeDiff"  class="col-xs-12 col-md-4">Difficulté : </label><select class="form-control col-xs-12 col-md-8" id="recipeDiff" required>
+			<label for="recipeDiff"  class="col-xs-12 col-md-4">Difficulté : </label><select class="authInput form-control col-xs-12 col-md-8" id="recipeDiff" required>
 					<option>Facile</option>
 					<option>Moyenne</option>
 					<option>Difficile</option>
 					<option>Très Difficile</option>
 				</select>
-			<div class="help-block with-errors"></div>
 		</div><div class="form-group row">
-			<label for="recipeDuration"  class="col-xs-12 col-md-4">Durée : </label><select class="form-control col-xs-12 col-md-8" id="recipeDuration" required>
+			<label for="recipeDuration"  class="col-xs-12 col-md-4">Durée : </label><select class="authInput form-control col-xs-12 col-md-8" id="recipeDuration" required>
 					<option>Courte</option>
 					<option>Moyenne</option>
 					<option>Longue</option>
 					<option>Très Longue</option>
 				</select>
-			<div class="help-block with-errors"></div>
 		</div><div class="form-group row">
-			<label for="recipeType"  class="col-xs-12 col-md-4">Type : </label><select class="form-control col-xs-12 col-md-8" id="recipeType" required>
+			<label for="recipeType"  class="col-xs-12 col-md-4">Type : </label><select class="authInput form-control col-xs-12 col-md-8" id="recipeType" required>
 					<option>Déjeuner</option>
 					<option>Repas</option>
 					<option>Accompagnement</option>
@@ -98,18 +96,12 @@
 					<option>Dessert</option>
 					<option>Collation</option>
 				</select>
-			<div class="help-block with-errors"></div>
 		</div><div class="form-group row">
-			<label for="recipeIngredients"  class="col-xs-12 col-md-4">Ingrédients clés (séparés par des virgules): </label><input type="text" class="form-control col-xs-12 col-md-8" id="recipeIngredients" 
-				pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-,]{1,}$" maxlength="255" required>
-			<div class="help-block with-errors"></div>
+			<label for="recipeIngredients"  class="col-xs-12 col-md-4">Ingrédients clés (séparés par des virgules): </label><input type="text" class="authInput form-control col-xs-12 col-md-8" id="recipeIngredients" required>
 		</div><div class="form-group row">
-			<label for="recipeTags"  class="col-xs-12 col-md-4">Mots clés (séparés par des virgules): </label><input type="text" class="form-control col-xs-12 col-md-8" id="recipeTags"
-				pattern="^[a-zàâçéèêëîïôûùüÿñæœ .-,]{1,}$" maxlength="255">
-			<div class="help-block with-errors"></div>
+			<label for="recipeTags"  class="col-xs-12 col-md-4">Mots clés (séparés par des virgules): </label><input type="text" class="authInput form-control col-xs-12 col-md-8" id="recipeTags">
 		</div><div class="form-group row">
-			<label for="recipePDF"  class="col-xs-12 col-md-4">Fichier pdf : </label><input type="url" class="form-control col-xs-12 col-md-8" id="recipePDF" required>
-			<div class="help-block with-errors"></div>
+			<label for="recipePDF"  class="col-xs-12 col-md-4">Fichier pdf : </label><input type="url" class="authInput form-control col-xs-12 col-md-8" id="recipePDF" required>
 		</div><div class="auth btn-group offset-md-4 col-md-8"><button type="submit" class="btn btn-dark" id="add_recipe"><i class="material-icons">add</i></button></div>
 		<div class="auth btn-group offset-md-4 col-md-8">
 			<button type="submit" class="btn btn-dark" id="update_recipe"><i class="material-icons">done</i></button>

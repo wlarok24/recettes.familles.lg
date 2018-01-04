@@ -4,6 +4,8 @@
 ** Not for commercial use
 ***********************************************************/
 var recettes = recettes || {};
+var callTrue;
+var callFalse;
 /* Authentification */
 recettes.auth = recettes.auth || {};
 recettes.auth.provider = new firebase.auth.GoogleAuthProvider();
@@ -31,22 +33,23 @@ recettes.auth.signOut = function(){
 	  swal("Oups...", "Une erreur est survenue", "error");
 	});
 };
-recettes.auth.contributors = [];
 recettes.auth.isAContributor = function(user){
-	with(recettes.auth){
-		for(i = 0; i < contributors.length; i++){
-			if(user.email == contributors[i]){
-				return true;
-			}
-		}
-		return false;
-	}
-};
-recettes.auth.getContributors = function(){
 	recettes.db.database.ref('contributors').once("value", function(snapshot){
 			snapshot.forEach(function(childSnapshot) {
-				recettes.auth.contributors.push(childSnapshot.val());
+				if(user.email == childSnapshot.val()){
+					$(".auth").show();
+					$(".noauth").hide();
+					$(".authInput").prop("disabled", false);
+				} else {
+					$(".auth").remove(); //remove components only for contributors
+					$(".noauth").show();
+					$(".authInput").prop("disabled", true);
+				}
 			});
+		}, function(error) {
+		  // The callback failed.
+		  console.error(error);
+		  callbackFalse;
 		});
 };
 /* Database */
@@ -63,15 +66,16 @@ recettes.db.getRecettes = function(datatable){
 				var recette = childSnapshot.val();
 				recipes.push(recette);
 				datatable.row.add([
-					"<a href='formulaire_recette.html?key=" + cle + "|' >" + recette.nom + "</a>",
-					"<a href='" + recette.pdf + "' >La recette</a>",
+					recette.nom,
+					"<div class='btn-group'><a href='formulaire_recette.html?key=" + cle + "|' class='btn btn-outline-dark'><i class='material-icons'>edit</i></a>" + 
+					"<a href='" + recette.pdf + "' class='btn btn-outline-dark'><i class='material-icons'>insert_drive_file</i></a></div>",
 					recette.difficulte,
 					recette.duree,
 					recette.type,
 					recette.source,
 					recette.ingredients,
 					recette.tags,
-					recette.description
+					recette.description.replace(/\n/g, "<br>")
 				]).draw(false);
 			});
 		});
@@ -126,7 +130,6 @@ recettes.db.supprimerRecette = function(key){
 /* Document ready for nav */
 $(document).ready(function() {
 	with(recettes.auth){
-		getContributors();
 		$("#btnSignIn").show();
 		$("#btnContributorRequest").hide();
 		$("#btnSignOut").hide();
@@ -143,6 +146,7 @@ $(document).ready(function() {
 		});
 		$("#btnSignOut").click(signOut);
 		$(".auth").hide();
+		$(".authInput").prop("disabled", true);
 		//S'il y a un changement dans sign in ou out
 		firebase.auth().onAuthStateChanged(function(user){
 			if(user != null){ //Signed in
@@ -150,11 +154,7 @@ $(document).ready(function() {
 				$("#btnSignIn").hide();
 				$("#btnSignOut").show();
 				$("#btnContributorRequest").show();
-				if(isAContributor(user)){
-					$(".auth").show(); // User is a contributor
-				} else {
-					$(".auth").hide();
-				}
+				isAContributor(user);
 			} else { //Signed out
 				$("#account").html("Mon compte");
 				$("#btnSignIn").show();

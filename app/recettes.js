@@ -8,9 +8,18 @@
 $(document).ready(function(){
 	var datatable = $('#recettes').DataTable({
 		responsive : true,
+		"scrollY":        "500px",
+        "scrollCollapse": true,
+        "paging":         false,
+		"columnDefs": [ {
+			"targets": 1,
+			"orderable": false,
+			"searchable": false,
+			"visible": true
+		}],
 		language: {
 			processing:     "Traitement en cours...",
-			search:         "Rechercher&nbsp;:",
+			search:         "Recherche&nbsp;:",
 			lengthMenu:     "Afficher _MENU_ &eacute;l&eacute;ments",
 			info:           "Affichage des &eacute;lements _START_ &agrave; _END_ sur _TOTAL_",
 			infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",

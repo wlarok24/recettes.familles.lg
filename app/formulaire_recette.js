@@ -45,17 +45,20 @@ $(document).ready(function() {
 			$("#update_recipe").show();
 			$("#update_recipe").click(function(){
 				if(!$(this).hasClass("disabled")){
-					if(recettes.auth.isAContributor(firebase.auth().currentUser)){
-						// Get value of fields
-						var name = $("#recipeName").val();
-						var desc = $("#recipeDesc").val();
-						var sourceRecipe = $("#recipeSource").val();
-						var diff = $("#recipeDiff option:selected").html();
-						var duration = $("#recipeDuration option:selected").html();
-						var type = $("#recipeType option:selected").html();
-						var ingredients = $("#recipeIngredients").val();
-						var tags = $("#recipeTags").val();
-						var pdfLink = $("#recipePDF").val();
+					// Get value of fields
+					var cip = $("<div />");
+					var name = cip.text($("#recipeName").val()).html();
+					var desc = cip.text($("#recipeDesc").val()).html();
+					var sourceRecipe = cip.text($("#recipeSource").val()).html();
+					var diff = cip.text($("#recipeDiff option:selected").html()).html();
+					var duration = cip.text($("#recipeDuration option:selected").html()).html();
+					var type = cip.text($("#recipeType option:selected").html()).html();
+					var ingredients = cip.text($("#recipeIngredients").val()).html();
+					var tags = cip.text($("#recipeTags").val()).html();
+					var pdfLink = cip.text($("#recipePDF").val()).html();
+					
+					//Verifier le lien drive pour les pdfs
+					if((pdfLink.includes("https://drive.google.com/file/d/"))&&(pdfLink.includes("/view?usp=sharing"))){
 						// Update recipe
 						var promise = recettes.db.modifierRecette(key, name, desc, sourceRecipe, diff, duration,
 							type, ingredients, tags, pdfLink);
@@ -65,67 +68,50 @@ $(document).ready(function() {
 							(reason) => {
 								swal("Erreur", reason, "error");
 						});
-					} else {
-						swal("Vous n'êtes pas un contributeur", 
-							"Pour devenir un contributeur : <br><ul><li>" +
-							"Envoyer un courriel à l'addresse <a href='mailto:recettes.familles.lg@gmail.com'>recettes.familles.lg@gmail.com</a> avec votre addresse courriel de votre compte Google</li><li>" +
-							"Dans le courriel, veuiller indiquer ce que vous allez contribuer à notre librairie de recettes.</li></ul><br>" +
-							"Merci beaucoup","warning");
 					}
 				}
 			});
 			$("#delete_recipe").show();
 			$("#delete_recipe").click(function(){
 				if(!$(this).hasClass("disabled")){
-						if(recettes.auth.isAContributor(firebase.auth().currentUser)){
-						// Delete recipe
-						var promise = recettes.db.supprimerRecette(key);
-						promise.then(function(val){
-							swal("Succès", "La recette a été supprimer avec succès!", "success");
-						}).catch(
-							(reason) => {
-								swal("Erreur", reason, "error");
-						});
-					} else {
-						swal("Vous n'êtes pas un contributeur", 
-							"Pour devenir un contributeur : <br><ul><li>" +
-							"Envoyer un courriel à l'addresse <a href='mailto:recettes.familles.lg@gmail.com'>recettes.familles.lg@gmail.com</a> avec votre addresse courriel de votre compte Google</li><li>" +
-							"Dans le courriel, veuiller indiquer ce que vous allez contribuer à notre librairie de recettes.</li></ul><br>" +
-							"Merci beaucoup","warning");
-					}
+					// Delete recipe
+					var promise = recettes.db.supprimerRecette(key);
+					promise.then(function(val){
+						swal("Succès", "La recette a été supprimer avec succès!", "success");
+					}).catch(
+						(reason) => {
+							swal("Erreur", reason, "error");
+					});
 				}
 			});
 		} else {
 			$("#add_recipe").show();
 			$("#add_recipe").click(function(){
 				if(!$(this).hasClass("disabled")){
-					if(recettes.auth.isAContributor(firebase.auth().currentUser)){
-						// Get value of fields
-						var name = $("#recipeName").val();
-						var desc = $("#recipeDesc").val();
-						var sourceRecipe = $("#recipeSource").val();
-						var diff = $("#recipeDiff option:selected").html();
-						var duration = $("#recipeDuration option:selected").html();
-						var type = $("#recipeType option:selected").html();
-						var ingredients = $("#recipeIngredients").val();
-						var tags = $("#recipeTags").val();
-						var pdfLink = $("#recipePDF").val();
+					// Get value of fields
+					var cip = $("<div />");
+					var name = cip.text($("#recipeName").val()).html();
+					var desc = cip.text($("#recipeDesc").val()).html();
+					var sourceRecipe = cip.text($("#recipeSource").val()).html();
+					var diff = cip.text($("#recipeDiff option:selected").html()).html();
+					var duration = cip.text($("#recipeDuration option:selected").html()).html();
+					var type = cip.text($("#recipeType option:selected").html()).html();
+					var ingredients = cip.text($("#recipeIngredients").val()).html();
+					var tags = cip.text($("#recipeTags").val()).html();
+					var pdfLink = cip.text($("#recipePDF").val()).html();
+					if((pdfLink.includes("https://drive.google.com/file/d/"))&&(pdfLink.includes("/view?usp=sharing"))){
 						// Add recipe
 						var promise = recettes.db.ajouterRecette(name, desc, sourceRecipe, diff, duration,
 							type, ingredients, tags, pdfLink);
 						promise.then(function(val){
-							swal("Succès", "La recette a été modifiée avec succès!", "success");
+							swal("Succès", "La recette a été ajoutée avec succès!", "success");
 						}).catch(
 							(reason) => {
 								swal("Erreur", reason, "error");
 						});
+					} else {
+						swal("Erreur", "Le lien vers le fichier pdf doit venir de Google drive et partager le fichier.", "error")
 					}
-				} else {
-					swal("Vous n'êtes pas un contributeur", 
-					"Pour devenir un contributeur : <br><ul><li>" +
-					"Envoyer un courriel à l'addresse <a href='mailto:recettes.familles.lg@gmail.com'>recettes.familles.lg@gmail.com</a> avec votre addresse courriel de votre compte Google</li><li>" +
-					"Dans le courriel, veuiller indiquer ce que vous allez contribuer à notre librairie de recettes.</li></ul><br>" +
-					"Merci beaucoup","warning");
 				}
 			});
 			$("#update_recipe").hide();

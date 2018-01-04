@@ -30,7 +30,7 @@
 </head>
 <body>
 <!--Navbar-->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
   <a class="navbar-brand" href="#">Recettes de Familles</a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -48,33 +48,48 @@
 			<text id="account">Mon compte</text>
 		  </button>
 		  <div class="dropdown-menu dropdown-menu-right">
-			<a type="button" class="dropdown-item btn btn-dark" id="btnSignIn">Connection</a>
-			<a type="button" class="dropdown-item btn btn-dark" id="btnContributorRequest">Devenir un contributeur</a>
-			<a type="button" class="dropdown-item btn btn-dark" id="btnSignOut">Déconnection</a>
+			<a class="dropdown-item" href="#" id="btnSignIn">Connection</a>
+			<a class="dropdown-item noauth" href="#" id="btnContributorRequest">Devenir un contributeur</a>
+			<a class="dropdown-item" href="#" id="btnSignOut">Déconnection</a>
 		  </div>
 	  </div>
     </ul>
 	</div>
 </nav>
 <!-- Page de recettes -->
-<div class="jumbotron"><h1>Recettes</h1></div>
-<div class="container">
-	<table width="100%" class="display" id="recettes" cellspacing="0">
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Fichier pdf</th>
-				<th>Difficulté</th>
-				<th>Durée</th>
-				<th>Type</th>
-				<th>Source</th>
-				<th>Ingrédients clés</th>
-				<th>Mots clés</th>
-				<th>Description</th>
-			</tr>
-		</thead>
-	</table>
+<div class="jumbotron jumbotron-fluid"><div class="container">
+		<h1 class="display-4">Recettes de Familles</h1>
+		<p class="lead">De nos familles à la vôtre</p>
+	</div>
 </div>
+<div class="container-fluid"><table width="100%" class="display hover stripe" id="recettes" cellspacing="0">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Fichier pdf</th>
+			<th>Difficulté</th>
+			<th>Durée</th>
+			<th>Type</th>
+			<th>Source</th>
+			<th>Ingrédients clés</th>
+			<th>Mots clés</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>Nom</th>
+			<th>Fichier pdf</th>
+			<th>Difficulté</th>
+			<th>Durée</th>
+			<th>Type</th>
+			<th>Source</th>
+			<th>Ingrédients clés</th>
+			<th>Mots clés</th>
+			<th>Description</th>
+		</tr>
+	</tfoot>
+</table></div>
 <script src="recettes_familles_lg.js"></script>
 <script src="recettes.js"></script>
 </body>

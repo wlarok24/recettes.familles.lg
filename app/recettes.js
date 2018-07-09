@@ -8,9 +8,10 @@
 $(document).ready(function(){
 	var datatable = $('#recettes').DataTable({
 		responsive : true,
-		"scrollY":        "500px",
+		"scrollY":        ($(window).height() - 270) + "px",
         "scrollCollapse": true,
         "paging":         false,
+		fixedHeader: true,
 		"columnDefs": [ {
 			"targets": 1,
 			"orderable": false,

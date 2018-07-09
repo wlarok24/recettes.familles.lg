@@ -44,6 +44,7 @@ recettes.auth.isAContributor = function(user){
 					$(".auth").remove(); //remove components only for contributors
 					$(".noauth").show();
 					$(".authInput").prop("disabled", true);
+					return; //Exit foreach
 				}
 			});
 		}, function(error) {

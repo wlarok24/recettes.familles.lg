@@ -6,16 +6,8 @@
     "public": "app",
     "ignore": [
       "firebase.json",
-	  "firebase.rules.json",
-	  "firebase-debug.log",
       "**/.*",
-      "**/node_modules/**",
-	  "bootstrap-4.0.0-beta.3-dist.zip",
-	  "bootstrap-3.3.7-dist.zip",
-	  "",
-	  "bootstrap-validator-master.zip",
-	  "DataTables.zip",
-	  "README.md"
+      "**/node_modules/**"
     ]
-	}
+  }
 }

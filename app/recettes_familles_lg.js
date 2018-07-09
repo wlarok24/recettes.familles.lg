@@ -35,16 +35,19 @@ recettes.auth.signOut = function(){
 };
 recettes.auth.isAContributor = function(user){
 	recettes.db.database.ref('contributors').once("value", function(snapshot){
+			var found = false;
 			snapshot.forEach(function(childSnapshot) {
-				if(user.email == childSnapshot.val()){
-					$(".auth").show();
-					$(".noauth").hide();
-					$(".authInput").prop("disabled", false);
-				} else {
-					$(".auth").remove(); //remove components only for contributors
-					$(".noauth").show();
-					$(".authInput").prop("disabled", true);
-					return; //Exit foreach
+				if(!found){
+					if(user.email == childSnapshot.val()){
+						$(".auth").show();
+						$(".noauth").hide();
+						$(".authInput").prop("disabled", false);
+						found = true;
+					} else {
+						$(".auth").remove(); //remove components only for contributors
+						$(".noauth").show();
+						$(".authInput").prop("disabled", true);
+					}
 				}
 			});
 		}, function(error) {

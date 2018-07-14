@@ -37,19 +37,19 @@ recettes.auth.isAContributor = function(user){
 	recettes.db.database.ref('contributors').once("value", function(snapshot){
 			var found = false;
 			snapshot.forEach(function(childSnapshot) {
-				if(!found){
-					if(user.email == childSnapshot.val()){
-						$(".auth").show();
-						$(".noauth").hide();
-						$(".authInput").prop("disabled", false);
-						found = true;
-					} else {
-						$(".auth").remove(); //remove components only for contributors
-						$(".noauth").show();
-						$(".authInput").prop("disabled", true);
-					}
+				if((!found)&&(user.email == childSnapshot.val())){
+					found = true;
 				}
 			});
+			if(found){
+				$(".auth").show();
+				$(".noauth").hide();
+				$(".authInput").prop("disabled", false);
+			} else {
+				$(".auth").remove(); //remove components only for contributors
+				$(".noauth").show();
+				$(".authInput").prop("disabled", true);
+			}
 		}, function(error) {
 		  // The callback failed.
 		  console.error(error);

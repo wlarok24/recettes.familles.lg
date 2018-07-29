@@ -58,7 +58,7 @@ $(document).ready(function() {
 					var pdfLink = cip.text($("#recipePDF").val()).html();
 					
 					//Verifier le lien drive pour les pdfs
-					if((pdfLink.includes("https://drive.google.com/file/d/"))&&(pdfLink.includes("/view?usp=sharing"))){
+					if((pdfLink.includes("https://drive.google.com/file/d/"))&&((pdfLink.includes("/view?usp=sharing"))||(pdfLink.includes("/view?usp=drivesdk"))){
 						// Update recipe
 						var promise = recettes.db.modifierRecette(key, name, desc, sourceRecipe, diff, duration,
 							type, ingredients, tags, pdfLink);
@@ -68,6 +68,8 @@ $(document).ready(function() {
 							(reason) => {
 								swal("Erreur", reason, "error");
 						});
+					} else {
+						swal("Erreur", "Le lien vers le fichier pdf doit venir de Google drive et partager le fichier.", "error")
 					}
 				}
 			});
@@ -99,7 +101,7 @@ $(document).ready(function() {
 					var ingredients = cip.text($("#recipeIngredients").val()).html();
 					var tags = cip.text($("#recipeTags").val()).html();
 					var pdfLink = cip.text($("#recipePDF").val()).html();
-					if((pdfLink.includes("https://drive.google.com/file/d/"))&&(pdfLink.includes("/view?usp=sharing"))){
+					if((pdfLink.includes("https://drive.google.com/file/d/"))&&(pdfLink.includes("/view?usp=sharing")||pdfLink.includes("/view?usp=drivesdk"))){
 						// Add recipe
 						var promise = recettes.db.ajouterRecette(name, desc, sourceRecipe, diff, duration,
 							type, ingredients, tags, pdfLink);

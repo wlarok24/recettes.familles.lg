@@ -91,6 +91,8 @@
 			<label for="recipeType"  class="col-xs-12 col-md-4">Type : </label><select class="authInput form-control col-xs-12 col-md-8" id="recipeType" required>
 					<option>Déjeuner</option>
 					<option>Repas</option>
+					<option>Entrée</option>
+					<option>Soupe</option>
 					<option>Accompagnement</option>
 					<option>Sauce</option>
 					<option>Dessert</option>
@@ -100,6 +102,11 @@
 			<label for="recipeIngredients"  class="col-xs-12 col-md-4">Ingrédients clés (séparés par des virgules): </label><input type="text" class="authInput form-control col-xs-12 col-md-8" id="recipeIngredients" required>
 		</div><div class="form-group row">
 			<label for="recipeTags"  class="col-xs-12 col-md-4">Mots clés (séparés par des virgules): </label><input type="text" class="authInput form-control col-xs-12 col-md-8" id="recipeTags">
+		</div><div class="form-group row">
+			<label for="recipeTested"  class="col-xs-12 col-md-4">Est-ce que la recette a été testée?</label><select class="authInput form-control col-xs-12 col-md-8" id="recipeTested" required>
+					<option>Non-testée</option>
+					<option>Testée</option>
+				</select>
 		</div><div class="form-group row">
 			<label for="recipePDF"  class="col-xs-12 col-md-4">Fichier pdf : </label><input type="url" class="authInput form-control col-xs-12 col-md-8" id="recipePDF" required>
 		</div><div class="auth btn-group offset-md-4 col-md-8"><button type="button" class="btn btn-dark" id="add_recipe"><i class="material-icons">add</i></button></div>

@@ -56,9 +56,18 @@ $(document).ready(function() {
 					var ingredients = cip.text($("#recipeIngredients").val()).html();
 					var tags = cip.text($("#recipeTags").val()).html();
 					var pdfLink = cip.text($("#recipePDF").val()).html();
-					
+					//Ajouter le tag pour savoir si la recette a été testée
+					if (tags === ""){
+						tags = cip.text($("#recipeTested").val()).html();
+					} else if (tags.includes("Non-testée") && cip.text($("#recipeTested").val()).html() === "Testée") {
+						tags.replace("Non-testée", "Testée");
+					} else if (tags.includes("Testée") && cip.text($("#recipeTested").val()).html() === "Non-testée") {
+						tags.replace("Testée", "Non-testée");
+					} else {
+						tags = tags.concat(", ", cip.text($("#recipeTested").val()).html());
+					}
 					//Verifier le lien drive pour les pdfs
-					if((pdfLink.includes("https://drive.google.com/file/d/"))&&((pdfLink.includes("/view?usp=sharing"))||(pdfLink.includes("/view?usp=drivesdk"))){
+					if((pdfLink.includes("https://drive.google.com/file/d/"))&&((pdfLink.includes("/view?usp=sharing"))||(pdfLink.includes("/view?usp=drivesdk")))){
 						// Update recipe
 						var promise = recettes.db.modifierRecette(key, name, desc, sourceRecipe, diff, duration,
 							type, ingredients, tags, pdfLink);
@@ -101,7 +110,14 @@ $(document).ready(function() {
 					var ingredients = cip.text($("#recipeIngredients").val()).html();
 					var tags = cip.text($("#recipeTags").val()).html();
 					var pdfLink = cip.text($("#recipePDF").val()).html();
-					if((pdfLink.includes("https://drive.google.com/file/d/"))&&(pdfLink.includes("/view?usp=sharing")||pdfLink.includes("/view?usp=drivesdk"))){
+					//Ajouter le tag pour savoir si la recette a été testée
+					if (tags === ""){
+						tags = cip.text($("#recipeTested").val()).html();
+					} else {
+						tags = tags.concat(", ", cip.text($("#recipeTested").val()).html());
+					}
+					//Verifier le lien drive pour les pdfs
+					if((pdfLink.includes("https://drive.google.com/file/d/"))&&((pdfLink.includes("/view?usp=sharing"))||(pdfLink.includes("/view?usp=drivesdk")))){
 						// Add recipe
 						var promise = recettes.db.ajouterRecette(name, desc, sourceRecipe, diff, duration,
 							type, ingredients, tags, pdfLink);
